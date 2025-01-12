@@ -15,20 +15,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            joystick.SetActive(true);
-        }
-        else
-        {
-            joystick.SetActive(false);
-        }
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
+        //    joystick.SetActive(true);
+        //}
+        //else
+        //{
+        //    joystick.SetActive(false);
+        //}
     }
 
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        //movement.x = Input.GetAxisRaw("Horizontal");
+        //movement.y = Input.GetAxisRaw("Vertical");
+
+        movement.x = movementJoystick.Direction.x;
+        movement.y = movementJoystick.Direction.y;
 
         //animator.SetFloat("Horizontal", movement.x);
         //animator.SetFloat("Vertical", movement.y);
@@ -37,20 +40,23 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (movementJoystick.Direction.y != 0)
         {
-            if (movementJoystick.Direction.y != 0)
-            {
-                rb.linearVelocity = new Vector2(movementJoystick.Direction.x * moveSpeed, movementJoystick.Direction.y * moveSpeed);
-            }
-            else
-            {
-                rb.linearVelocity = Vector2.zero;
-            }
+            //rb.linearVelocity = new Vector2(movementJoystick.Direction.x * moveSpeed, movementJoystick.Direction.y * moveSpeed);
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         }
         else
         {
-            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            rb.linearVelocity = Vector2.zero;
         }
+        
+        
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
+        //}
+        //else
+        //{
+        //    rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        //}
     }
 }
