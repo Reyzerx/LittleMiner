@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class BoutonAction : MonoBehaviour
 {
+    public Player player;
+    public PlayerMovement playerMovement;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,5 +43,16 @@ public class BoutonAction : MonoBehaviour
     public void QuitterLeJeu()
     {
         Application.Quit();
+    }
+
+    public void PointerDownHold()
+    {
+        player.isMining = true;
+        playerMovement.animator.SetBool("isMining", true);
+    }
+    public void PointerUp()
+    {
+        player.isMining = false;
+        playerMovement.animator.SetBool("isMining", false);
     }
 }

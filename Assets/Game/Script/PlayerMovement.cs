@@ -13,16 +13,11 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject joystick;
 
+    public bool isControlEnabled = true;
+
     private void Start()
     {
-        //if (Application.platform == RuntimePlatform.Android)
-        //{
-        //    joystick.SetActive(true);
-        //}
-        //else
-        //{
-        //    joystick.SetActive(false);
-        //}
+
     }
 
     void Update()
@@ -33,30 +28,38 @@ public class PlayerMovement : MonoBehaviour
         movement.x = movementJoystick.Direction.x;
         movement.y = movementJoystick.Direction.y;
 
-        //animator.SetFloat("Horizontal", movement.x);
-        //animator.SetFloat("Vertical", movement.y);
-        //animator.SetFloat("Speed", movement.sqrMagnitude);
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        //var pour garder la direction après avoir marché
+        if (movement.x > 0.01 || movement.x < -0.01
+            || movement.y > 0.01 || movement.y < -0.01)
+        {
+            animator.SetFloat("LastHorizontal", movement.x);
+            animator.SetFloat("LastVertical", movement.y);
+        }
     }
 
     void FixedUpdate()
     {
-        if (movementJoystick.Direction.y != 0)
+        if (isControlEnabled)
         {
-            //rb.linearVelocity = new Vector2(movementJoystick.Direction.x * moveSpeed, movementJoystick.Direction.y * moveSpeed);
-            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            if (movementJoystick.Direction.y != 0)
+            {
+                //rb.linearVelocity = new Vector2(movementJoystick.Direction.x * moveSpeed, movementJoystick.Direction.y * moveSpeed);
+                rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            }
+            else
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+
         }
-        else
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
-        
-        
-        //if (Application.platform == RuntimePlatform.Android)
-        //{
-        //}
-        //else
-        //{
-        //    rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        //}
+    }
+
+    public void EnabledControl(bool value)
+    {
+        isControlEnabled = value;
     }
 }

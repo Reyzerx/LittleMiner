@@ -20,7 +20,14 @@ public class MineraiCore : MonoBehaviour
     {
         player = collision.GetComponent<Player>();
 
-        player.gagnerMinerai(this.transform.parent.tag);
+        player.isCollideMinerai = true;
+
+        player.GagnerMinerai(this.transform.parent.tag);
         Debug.Log("Gagner +1" + this.transform.parent.tag);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+
     }
 }
