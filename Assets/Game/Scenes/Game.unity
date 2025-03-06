@@ -129,14 +129,14 @@ GameObject:
   m_Component:
   - component: {fileID: 24770459}
   - component: {fileID: 24770461}
-  - component: {fileID: 24770460}
+  - component: {fileID: 24770462}
   m_Layer: 0
-  m_Name: Trigger
+  m_Name: TriggerOr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &24770459
 Transform:
   m_ObjectHideFlags: 0
@@ -152,18 +152,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 711432969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &24770460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24770458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d6f15cad4adbe45a18c33a16748d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &24770461
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -210,6 +198,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &24770462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24770458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d6f15cad4adbe45a18c33a16748d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &96830379
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +562,8 @@ Transform:
   m_LocalPosition: {x: -1.039, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 935861789}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &177791940
@@ -603,7 +604,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    oldSize: {x: 0.8125, y: 1.25}
     newSize: {x: 0.8125, y: 1.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -629,6 +630,9 @@ MonoBehaviour:
   textPierre: {fileID: 1893869383}
   isCollideMinerai: 0
   isMining: 0
+  isMoving: 0
+  currentMinableObject: {fileID: 0}
+  lookDirection: {x: 0, y: 0}
 --- !u!95 &177791943
 Animator:
   serializedVersion: 7
@@ -3612,7 +3616,7 @@ GameObject:
   - component: {fileID: 430363269}
   - component: {fileID: 430363271}
   - component: {fileID: 430363270}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pierre
   m_TagString: Pierre
   m_Icon: {fileID: 0}
@@ -3628,7 +3632,7 @@ Transform:
   m_GameObject: {fileID: 430363268}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.11, y: -0.21, z: 0.07548218}
+  m_LocalPosition: {x: -4.11, y: -0.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3921,7 +3925,7 @@ GameObject:
   - component: {fileID: 711432969}
   - component: {fileID: 711432970}
   - component: {fileID: 711432971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Or
   m_TagString: Or
   m_Icon: {fileID: 0}
@@ -3937,7 +3941,7 @@ Transform:
   m_GameObject: {fileID: 711432968}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07548218}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4240,6 +4244,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925186863}
   m_CullTransparentMesh: 1
+--- !u!1 &935861788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935861789}
+  - component: {fileID: 935861790}
+  m_Layer: 0
+  m_Name: Raycast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &935861789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935861788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 177791939}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &935861790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935861788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09da59adac77cdd4bacb8d9784221153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactRange: 0.9
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  playerScript: {fileID: 177791941}
 --- !u!1 &1020115067
 GameObject:
   m_ObjectHideFlags: 0
@@ -4289,12 +4342,12 @@ GameObject:
   - component: {fileID: 1215931795}
   - component: {fileID: 1215931794}
   m_Layer: 0
-  m_Name: Trigger
+  m_Name: TriggerPierre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1215931793
 Transform:
   m_ObjectHideFlags: 0
@@ -4516,7 +4569,6 @@ GameObject:
   - component: {fileID: 1314977446}
   - component: {fileID: 1314977445}
   - component: {fileID: 1314977444}
-  - component: {fileID: 1314977447}
   m_Layer: 5
   m_Name: Bouton_Utiliser
   m_TagString: Untagged
@@ -4541,7 +4593,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -338, y: 305}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1314977444
 MonoBehaviour:
@@ -4586,7 +4638,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1314977445}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 372420601}
+        m_TargetAssemblyTypeName: BoutonAction, Assembly-CSharp
+        m_MethodName: PointerDownHold
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1314977445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4625,75 +4689,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1314977442}
   m_CullTransparentMesh: 1
---- !u!114 &1314977447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314977442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372420601}
-          m_TargetAssemblyTypeName: BoutonAction, Assembly-CSharp
-          m_MethodName: PointerDownHold
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 177791938}
-          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-          m_MethodName: EnabledControl
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 372420601}
-          m_TargetAssemblyTypeName: BoutonAction, Assembly-CSharp
-          m_MethodName: PointerUp
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 177791938}
-          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-          m_MethodName: EnabledControl
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &1421963769
 GameObject:
   m_ObjectHideFlags: 0

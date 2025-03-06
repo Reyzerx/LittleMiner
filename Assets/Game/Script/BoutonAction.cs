@@ -44,15 +44,4 @@ public class BoutonAction : MonoBehaviour
     {
         Application.Quit();
     }
-
-    public void PointerDownHold()
-    {
-        player.isMining = true;
-        playerMovement.animator.SetBool("isMining", true);
-    }
-    public void PointerUp()
-    {
-        player.isMining = false;
-        playerMovement.animator.SetBool("isMining", false);
-    }
 }

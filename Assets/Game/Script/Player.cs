@@ -11,6 +11,11 @@ public class Player : MonoBehaviour
 
     public bool isCollideMinerai = false;
     public bool isMining = false;
+    public bool isMoving = false;
+
+    public GameObject currentMinableObject;
+
+    public Vector2 lookDirection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,21 +30,27 @@ public class Player : MonoBehaviour
         
     }
 
-    public void GagnerMinerai(string typeMineraiIn)
+    public void GagnerMinerai()
     {
         if (isCollideMinerai)
         {
-            if (typeMineraiIn == "Or")
+            if(currentMinableObject != null)
             {
-                or++;
-            }
-            else if (typeMineraiIn == "Pierre")
-            {
-                pierre++;
-            }
+                if (currentMinableObject.tag == "Or")
+                {
+                    or++;
+                }
+                else if (currentMinableObject.tag == "Pierre")
+                {
+                    pierre++;
+                }
 
-            textOr.text = or.ToString();
-            textPierre.text = pierre.ToString();
+                this.GetComponent<PlayerMovement>().animator.SetBool("isMining", false);
+                Destroy(currentMinableObject);
+            }
         }
+
+        textOr.text = or.ToString();
+        textPierre.text = pierre.ToString();
     }
 }

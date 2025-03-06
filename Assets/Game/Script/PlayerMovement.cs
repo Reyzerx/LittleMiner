@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         if (movement.x > 0.01 || movement.x < -0.01
             || movement.y > 0.01 || movement.y < -0.01)
         {
+            //this.GetComponent<Player>().lookDirection = movement.normalized;
             animator.SetFloat("LastHorizontal", movement.x);
             animator.SetFloat("LastVertical", movement.y);
         }
@@ -48,10 +49,12 @@ public class PlayerMovement : MonoBehaviour
             if (movementJoystick.Direction.y != 0)
             {
                 //rb.linearVelocity = new Vector2(movementJoystick.Direction.x * moveSpeed, movementJoystick.Direction.y * moveSpeed);
+                this.GetComponent<Player>().isMoving = true;
                 rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
             }
             else
             {
+                this.GetComponent<Player>().isMoving = false;
                 rb.linearVelocity = Vector2.zero;
             }
 
